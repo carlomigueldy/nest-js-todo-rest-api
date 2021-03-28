@@ -20,7 +20,10 @@ export class TodoService {
   }
 
   async create(createTodoDto: CreateTodoDto): Promise<Todo> {
-    return await new this.model(createTodoDto).save();
+    return await new this.model({
+      ...createTodoDto,
+      createdAt: new Date(),
+    }).save();
   }
 
   async update(id: string, updateTodoDto: UpdateTodoDto): Promise<Todo> {
